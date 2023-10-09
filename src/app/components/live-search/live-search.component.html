@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="search">
+    <input
+      [formControl]="searchField"
+      class="input"
+      type="text"
+      placeholder="Search..."
+    />
+    <button class="btn" (click)="fetchUsers()">
+      <strong>Fetch Users</strong>
+    </button>
+  </div>
+
+  <div *ngIf="users.length; else noUsers" class="users">
+    <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+  </div>
+  <ng-template #noUsers><strong>No users fetched yet...</strong></ng-template>
+</div>

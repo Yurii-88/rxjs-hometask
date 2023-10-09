@@ -1,0 +1,13 @@
+:host {
+  width: inherit;
+  height: inherit;
+
+  .draggable {
+    position: absolute;
+    background-color: pink;
+    height: 200px;
+    width: 100px;
+    cursor: move;
+    caret-color: transparent;
+  }
+}

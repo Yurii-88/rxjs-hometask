@@ -1,0 +1,13 @@
+<div class="container">
+  <h2 class="title">Take a note!</h2>
+
+  <div class="search">
+    <input
+      [formControl]="searchField"
+      class="input"
+      type="text"
+      placeholder="Search..."
+    />
+  </div>
+  <p class="status">{{ status | async }}</p>
+</div>

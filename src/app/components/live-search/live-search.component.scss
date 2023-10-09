@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  height: inherit;
+  justify-content: center;
+  width: inherit;
+
+  .container {
+    position: fixed;
+
+    .search {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0;
+      gap: 30px;
+
+      .input {
+        border: 2px solid grey;
+        border-radius: 5px;
+        font-size: 20px;
+        height: 3rem;
+        width: 500px;
+      }
+
+      .btn {
+        caret-color: transparent;
+        border: 2px solid grey;
+        border-radius: 5px;
+
+        &:hover {
+          cursor: pointer;
+          color: darkorange;
+        }
+      }
+    }
+
+    .users {
+      height: 500px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+  }
+}
