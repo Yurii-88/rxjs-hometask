@@ -1,10 +1,12 @@
 .user {
+  background-color: lightblue;
+  border: 2px solid darkcyan;
   display: flex;
   gap: 30px;
   justify-content: center;
-  border: 2px solid darkcyan;
   margin: 10px 0;
-  background-color: lightblue;
+  padding: 0 20px;
+  width: 450px;
 
   &:hover {
     cursor: pointer;

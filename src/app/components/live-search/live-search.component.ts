@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { DataService } from 'src/app/services/data.service';
 import { User } from '../../interface';
 
@@ -10,31 +11,27 @@ import { User } from '../../interface';
   styleUrls: ['./live-search.component.scss'],
 })
 export class LiveSearchComponent implements OnInit {
-  initialUsers!: User[];
-  users: User[] = [];
+  users$!: Observable<User[]>;
   searchField = new FormControl();
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.searchField.valueChanges
-      .pipe(map((value) => this.filterUsers(value)))
-      .subscribe((filtered) => (this.users = filtered));
+    this.users$ = combineLatest([
+      this.searchField.valueChanges,
+      this.dataService.getUsers(),
+    ]).pipe(
+      startWith([]),
+      map(([input, users]) => this.filterUsers(input, users))
+    );
   }
 
-  fetchUsers(): void {
-    this.dataService.getUsers().subscribe((users) => {
-      this.users = users;
-      this.initialUsers = users;
-    });
-  }
-
-  private filterUsers(input: string): User[] {
+  private filterUsers(input: string, users: User[]): User[] {
     if (!input) {
-      this.users = this.initialUsers;
+      return [];
     }
 
-    return this.initialUsers.filter((user) => {
+    return users.filter((user) => {
       const { name, username, email, phone, address } = user;
       const { city, street, zipcode } = address;
 
